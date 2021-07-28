@@ -19,6 +19,7 @@ package org.gradle.tooling.internal.provider.runner;
 import org.gradle.api.internal.GradleInternal;
 import org.gradle.initialization.BuildCancellationToken;
 import org.gradle.internal.build.BuildStateRegistry;
+import org.gradle.internal.build.BuildToolingModelController;
 import org.gradle.internal.operations.BuildOperationExecutor;
 import org.gradle.internal.resources.ProjectLeaseRegistry;
 import org.gradle.internal.service.scopes.Scopes;
@@ -38,7 +39,7 @@ public class BuildControllerFactory {
         this.buildStateRegistry = buildStateRegistry;
     }
 
-    public DefaultBuildController controllerFor(GradleInternal gradle) {
-        return new DefaultBuildController(gradle, buildCancellationToken, buildOperationExecutor, projectLeaseRegistry, buildStateRegistry);
+    public DefaultBuildController controllerFor(BuildToolingModelController controller) {
+        return new DefaultBuildController(controller, buildCancellationToken, buildOperationExecutor, projectLeaseRegistry, buildStateRegistry);
     }
 }

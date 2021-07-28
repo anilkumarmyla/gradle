@@ -214,7 +214,11 @@ public class StateTransitionController<T extends StateTransitionController.State
     private ExecutionResult<Void> doTransition(T fromState, T toState, Supplier<ExecutionResult<Void>> action) {
         assertNotFailed();
         if (currentTarget != null) {
-            throw new IllegalStateException("Cannot transition to state " + toState + " as already transitioning to state " + currentTarget + ".");
+            if (currentTarget == toState) {
+                throw new IllegalStateException("Cannot transition to state " + toState + " as already transitioning to this state.");
+            } else {
+                throw new IllegalStateException("Cannot transition to state " + toState + " as already transitioning to state " + currentTarget + ".");
+            }
         }
         if (state != fromState) {
             throw new IllegalStateException("Can only transition to state " + toState + " from state " + fromState + " however currently in state " + state + ".");

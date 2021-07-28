@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package org.gradle.internal.buildtree;
+package org.gradle.integtests.tooling.r73;
 
-import org.gradle.internal.build.BuildToolingModelAction;
+import org.gradle.tooling.BuildAction;
+import org.gradle.tooling.BuildController;
 
-/**
- * Responsible for creating a model from the build tree model.
- */
-public interface BuildTreeModelCreator {
-    <T> void beforeTasks(BuildToolingModelAction<? extends T> action);
-
-    <T> T fromBuildModel(BuildToolingModelAction<? extends T> action);
+public class NoOpAction implements BuildAction<String> {
+    @Override
+    public String execute(BuildController controller) {
+        return "result";
+    }
 }

@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package org.gradle.internal.buildtree;
+package org.gradle.internal.build;
 
-import org.gradle.internal.build.BuildToolingModelAction;
+import org.gradle.api.internal.GradleInternal;
 
-/**
- * Responsible for creating a model from the build tree model.
- */
-public interface BuildTreeModelCreator {
-    <T> void beforeTasks(BuildToolingModelAction<? extends T> action);
+public interface BuildToolingModelController {
+    /**
+     * Returns the current state of the mutable model.
+     */
+    GradleInternal getMutableModel();
 
-    <T> T fromBuildModel(BuildToolingModelAction<? extends T> action);
+    /**
+     * Returns the mutable model, configuring if necessary.
+     */
+    GradleInternal getConfiguredModel();
 }

@@ -18,8 +18,8 @@ package org.gradle.internal.buildtree;
 
 import org.gradle.api.internal.GradleInternal;
 import org.gradle.internal.build.BuildLifecycleController;
-
-import java.util.function.Function;
+import org.gradle.internal.build.BuildToolingModelAction;
+import org.gradle.internal.build.BuildToolingModelController;
 
 public class DefaultBuildTreeModelCreator implements BuildTreeModelCreator {
     private final BuildLifecycleController buildController;
@@ -29,8 +29,24 @@ public class DefaultBuildTreeModelCreator implements BuildTreeModelCreator {
     }
 
     @Override
-    public <T> T fromBuildModel(Function<? super GradleInternal, T> action) {
-        buildController.getConfiguredBuild();
-        return action.apply(buildController.getGradle());
+    public <T> void beforeTasks(BuildToolingModelAction<? extends T> action) {
+        action.beforeTasks(new DefaultBuildToolingModelController());
+    }
+
+    @Override
+    public <T> T fromBuildModel(BuildToolingModelAction<? extends T> action) {
+        return action.fromBuildModel(new DefaultBuildToolingModelController());
+    }
+
+    private class DefaultBuildToolingModelController implements BuildToolingModelController {
+        @Override
+        public GradleInternal getConfiguredModel() {
+            return buildController.getConfiguredBuild();
+        }
+
+        @Override
+        public GradleInternal getMutableModel() {
+            return buildController.getGradle();
+        }
     }
 }
