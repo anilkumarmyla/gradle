@@ -36,8 +36,6 @@ class ModelBuilderCrossVersionSpec extends ToolingApiSpecification {
             ModelBuilder<BuildEnvironment> modelBuilder = connection.model(BuildEnvironment.class)
             modelBuilder.forTasks(new String[0])
             collectOutputs(modelBuilder)
-            modelBuilder.setStandardOutput(outputStream)
-            modelBuilder.setStandardError(errorStream)
             modelBuilder.get()
         }
 

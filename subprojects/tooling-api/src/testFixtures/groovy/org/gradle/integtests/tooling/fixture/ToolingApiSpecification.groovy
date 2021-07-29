@@ -23,9 +23,11 @@ import org.gradle.integtests.fixtures.RepoScriptBlockUtil
 import org.gradle.integtests.fixtures.build.BuildTestFile
 import org.gradle.integtests.fixtures.build.BuildTestFixture
 import org.gradle.integtests.fixtures.daemon.DaemonsFixture
+import org.gradle.integtests.fixtures.executer.ExecutionFailure
 import org.gradle.integtests.fixtures.executer.ExecutionResult
 import org.gradle.integtests.fixtures.executer.GradleDistribution
 import org.gradle.integtests.fixtures.executer.IntegrationTestBuildContext
+import org.gradle.integtests.fixtures.executer.OutputScrapingExecutionFailure
 import org.gradle.integtests.fixtures.executer.OutputScrapingExecutionResult
 import org.gradle.integtests.fixtures.executer.UnderDevelopmentGradleDistribution
 import org.gradle.test.fixtures.file.CleanupTestDirectory
@@ -311,6 +313,10 @@ abstract class ToolingApiSpecification extends Specification {
 
     ExecutionResult getResult() {
         return OutputScrapingExecutionResult.from(stdout.toString(), stderr.toString())
+    }
+
+    ExecutionFailure getFailure() {
+        return OutputScrapingExecutionFailure.from(stdout.toString(), stderr.toString())
     }
 
     def <T> T loadToolingModel(Class<T> modelClass) {

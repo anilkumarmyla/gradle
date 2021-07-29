@@ -16,7 +16,7 @@
 
 package org.gradle.integtests.tooling.r48
 
-import org.gradle.integtests.fixtures.executer.OutputScrapingExecutionFailure
+
 import org.gradle.integtests.tooling.fixture.TargetGradleVersion
 import org.gradle.integtests.tooling.fixture.ToolingApiSpecification
 import org.gradle.integtests.tooling.fixture.ToolingApiVersion
@@ -155,7 +155,6 @@ class PhasedBuildActionCrossVersionSpec extends ToolingApiSpecification {
         buildFinishedHandler.getResult() == null
 
         and:
-        def failure = OutputScrapingExecutionFailure.from(stdout.toString(), stderr.toString())
         if (targetDist.toolingApiHasCauseOnPhasedActionFail) {
             failure.assertHasDescription('actionFailure')
         } else {
@@ -191,7 +190,6 @@ class PhasedBuildActionCrossVersionSpec extends ToolingApiSpecification {
         buildFinishedHandler.getResult() == null
 
         and:
-        def failure = OutputScrapingExecutionFailure.from(stdout.toString(), stderr.toString())
         failure.assertHasDescription("A problem occurred evaluating root project")
         assertHasConfigureFailedLogging()
     }
@@ -224,7 +222,6 @@ class PhasedBuildActionCrossVersionSpec extends ToolingApiSpecification {
         buildFinishedHandler.getResult() == null
 
         and:
-        def failure = OutputScrapingExecutionFailure.from(stdout.toString(), stderr.toString())
         failure.assertHasDescription("Execution failed for task ':broken'.")
         assertHasBuildFailedLogging()
     }
