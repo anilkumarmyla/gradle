@@ -13,7 +13,10 @@ dependencies {
     implementation(libs.commonsHttpclient)
     implementation(libs.slf4jApi)
     implementation(libs.jclToSlf4j)
-    implementation(libs.jcifs)
+    implementation(libs.jcifs) {
+        // we're only using utility classes and do not depend on servlet-api here
+        exclude("javax.servlet", "servlet-api")
+    }
     implementation(libs.guava)
     implementation(libs.commonsLang)
     implementation(libs.commonsIo)
