@@ -20,7 +20,6 @@ repositories {
         url = uri("https://repo.gradle.org/gradle/public")
         content {
             includeGroup("net.rubygrapefruit")
-            includeGroup("org.gradle.org.openjdk.jmc")
             includeModule("flot", "flot")
             includeModuleByRegex("org.gradle", "sample-(check|discovery)")
         }
