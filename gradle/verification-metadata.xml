@@ -86,6 +86,7 @@
          <trusted-key id="314fe82e5a4c5377bca2edec5208812e1e4a6db0">
             <trusting group="com.gradle"/>
             <trusting group="org.gradle"/>
+            <trusting group="org.gradle.profiler"/>
             <trusting group="^com[.]gradle($|([.].*))" regex="true"/>
             <trusting group="com.gradle" name="gradle-enterprise-gradle-plugin"/>
             <trusting group="net.rubygrapefruit"/>
